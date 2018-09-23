@@ -114,7 +114,7 @@ public class PiBBPBench678 {
         delta = System.currentTimeMillis() - delta;
         System.out.println(delta/1000.0);
 
- for(int d=10000000; d<10000001; ++d) {
+ /*for(int d=10000000; d<10000001; ++d) {
             
             d16Pi = 0.0d;
             
@@ -154,6 +154,6 @@ public class PiBBPBench678 {
         
         System.out.println(jegy);
         delta = System.currentTimeMillis() - delta;
-        System.out.println(delta/1000.0);
+        System.out.println(delta/1000.0);*/
     }
 } 
