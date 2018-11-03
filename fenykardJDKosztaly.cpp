@@ -57,6 +57,7 @@
 #include <map>
 #include <iomanip>
 #include <fstream>
+#include <vector>
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -64,9 +65,10 @@
 #include <boost/tokenizer.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
-#include "player.hpp"
+/*#include "player.hpp"*/
+using namespace std;
 
-int get_points ( boost::filesystem::path file )
+/*int get_points ( boost::filesystem::path file )
 {
         int points {0};
 
@@ -115,29 +117,31 @@ void print_acts ( std::map <std::string, int> acts )
                 std::cout << std::setw ( 4 ) << a.second << "    " << a.first << std::endl;
 
 }
-
-void read_acts ( boost::filesystem::path path, std::map <std::string, int> &acts )
+*/
+int szamlalo=0;
+void read_file ( boost::filesystem::path path, std::vector<std::string> acts )
 {
 
         if ( is_regular_file ( path ) ) {
 
-                std::string ext ( ".props" );
+                std::string ext ( ".java" );
                 if ( !ext.compare ( boost::filesystem::extension ( path ) ) ) {
 
                         std::string actpropspath = path.string();
                         std::size_t end = actpropspath.find_last_of ( "/" );
                         std::string act = actpropspath.substr ( 0, end );
 
-                        acts[act] = get_points ( path );
+                        acts.push_back(act);
+			szamlalo++;
 
                 }
 
         } else if ( is_directory ( path ) )
-                for ( boost::filesystem::directory_entry & entry : boost::filesystem::directory_iterator ( path ) )
-                        read_acts ( entry.path(), acts );
+                for ( boost::filesystem::directory_entry & entry :boost::filesystem::directory_iterator ( path ) )
+                        read_file ( entry.path(), acts );
 
 }
-
+/*
 std::map <std::string, int> acts_map ( std::vector<std::string>  folder_names )
 {
         std::map <std::string, int> acts;
@@ -500,9 +504,13 @@ struct tm *next_calendar_day ( struct tm *date )
 
         return date;
 }
-
+*/
 int main ( int argc, char *argv[] )
 {
+string path="src";
+vector<string> acts;
+read_file(path,acts);
+cout<<"szamlalo: "<<szamlalo<< std::endl;
         // If you use this sample you should add your copyright information here too:
         /*
         std::cout << "This Prog1 Lightsaber has been modified by <Your Name>" << std::endl
@@ -511,6 +519,7 @@ int main ( int argc, char *argv[] )
         */
 
         // Do not remove this copyright notice!
+        /*
         std::cout << "FUTURE DEBRECEN, UDProg1/DeacH Lightsaber to support alternative grading scales" << std::endl
                   << "Copyright (C) 2018 Norbert Bátfai" << std::endl
                   << "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>" << std::endl
@@ -711,5 +720,5 @@ int main ( int argc, char *argv[] )
                 }
 
         }
-
+*/
 }
