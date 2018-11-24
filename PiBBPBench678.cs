@@ -112,11 +112,11 @@ public class PiBBPBench {
             jegy = (int)System.Math.Floor(16.0d*d16Pi);
             
         }
-        /*
+        
         System.Console.WriteLine(jegy);
         System.TimeSpan delta = System.DateTime.Now.Subtract(kezd);
         System.Console.WriteLine(delta.TotalMilliseconds/1000.0);
-         for(int d=10000000; d<10000001; ++d) {
+         /*for(int d=10000000; d<10000001; ++d) {
             
             d16Pi = 0.0d;
             
