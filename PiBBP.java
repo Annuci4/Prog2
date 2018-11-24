@@ -1,86 +1,117 @@
-/*
- * PiBBP.java
- *
- * DIGIT 2005, Javat tanítok
- * Bátfai Norbert, nbatfai@inf.unideb.hu
- *
- */
-/**
- * A BBP (Bailey-Borwein-Plouffe) algoritmust a Pi hexa
- * jegyeinek számolását végző osztály. A könnyebb olvahatóság
- * kedvéért a változó és metódus neveket megpróbáltuk az algoritmust
- * bemutató [BBP ALGORITMUS] David H. Bailey: The BBP Algorithm for Pi.
- * cikk jelöléseihez.
- *
- * @author Bátfai Norbert, nbatfai@inf.unideb.hu
- * @version 0.0.1
- */
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class PiBBP {
-    /** A Pi hexa kifejtésében a d+1. hexa jegytől néhány hexa jegy.*/
-    String d16PiHexaJegyek;
-    /**
-     * Létrehoz egy <code>PiBBP</code>, a BBP algoritmust a Pi-hez
-     * alkalmazó objektumot. A [BBP ALGORITMUS] David H. Bailey: The
-     * BBP Algorithm for Pi. alapján a
-     * {16^d Pi} = {4*{16^d S1} - 2*{16^d S4} - {16^d S5} - {16^d S6}}
-     * kiszámítása, a {} a törtrészt jelöli.
-     *
-     * @param   d   a Pi hexa kifejtésében a d+1. hexa jegytől
-     * számoljuk a hexa jegyeket
-     */
-    public PiBBP(int d) {
+     public static char betuzes(double pi)
+     {
+         int kovetkezojegy = (int) (pi*16);
+         //System.out.println("Pi: "+pi*16);
+         char betu = 0;
+              if(kovetkezojegy>=0 && kovetkezojegy<=9 )
+                betu = (char) (kovetkezojegy + '0');
+              
+              else{
+                  if(kovetkezojegy==10)
+                      betu='A';
+                  else{
+                     if(kovetkezojegy==11)
+                       betu='B';
+                     else{
+                        if(kovetkezojegy==12)
+                            betu='C';
+                        else{
+                            if(kovetkezojegy==13)
+                                betu='D';
+                            else{
+                               if(kovetkezojegy==14)
+                                    betu='E';
+                               else{
+                                    if(kovetkezojegy==15)
+                                        betu='F';
+                    }}}}}}
+            //System.out.println("belepett");
+            //System.out.println(betu);
+            return betu;
+     }        
+     
+    public static double Hexalas(double pi)
+    {
         
-        double d16Pi = 0.0d;
-        
-        double d16S1t = d16Sj(d, 1);
-        double d16S4t = d16Sj(d, 4);
-        double d16S5t = d16Sj(d, 5);
-        double d16S6t = d16Sj(d, 6);
-        
-        d16Pi = 4.0d*d16S1t - 2.0d*d16S4t - d16S5t - d16S6t;
-        
-        d16Pi = d16Pi - StrictMath.floor(d16Pi);
-        
-        StringBuffer sb = new StringBuffer();
-        
-        Character hexaJegyek[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-        
-        while(d16Pi != 0.0d) {
-            
-            int jegy = (int)StrictMath.floor(16.0d*d16Pi);
-            
-            if(jegy<10)
-                sb.append(jegy);
-            else
-                sb.append(hexaJegyek[jegy-10]);
-            
-            d16Pi = (16.0d*d16Pi) - StrictMath.floor(16.0d*d16Pi);
+            pi=(pi*16) - (int) (pi*16);
+            //System.out.println("Pi jegyek2: "+pi);
+        return pi;
+    }  
+          
+
+    public static double modulo(double n,double k){
+            long t=1;
+            double r=1;
+            int b=16;
+           
+        while(t<=n){
+           t=t*2;
+           
         }
         
-        d16PiHexaJegyek = sb.toString();
+             t/=2;
+        while(true)
+             {
+                 if(n>=t)
+                 {
+                  r=b*r%k;
+                  n=n-t;
+                 }
+                  t/=2;
+                
+               if(t>=1) {
+                 r=Math.pow(r,2)%k;
+                }
+                else
+                    break;
+             }
+        return r;
     }
-    /**
-     * BBP algoritmus a Pi-hez, a [BBP ALGORITMUS] David H. Bailey: The
-     * BBP Algorithm for Pi. alapján a {16^d Sj} részlet kiszámítása.
-     *
-     * @param   d   a d+1. hexa jegytől számoljuk a hexa jegyeket
-     * @param   j   Sj indexe
-     */
-    public double d16Sj(int d, int j) {
+    public static void main(String[] args) throws IOException {
+        int d=1000000;
+        double S1 = 0,S4 = 0,S5 = 0,S6 = 0, pi=0;
         
-        double d16Sj = 0.0d;
-        
-        for(int k=0; k<=d; ++k)
-            d16Sj += (double)n16modk(d-k, 8*k + j) / (double)(8*k + j);
-        
-        /* (bekapcsolva a sorozat elejen az első utáni jegyekben növeli pl.
-            a pontosságot.)
-        for(int k=d+1; k<=2*d; ++k)
-            d16Sj += StrictMath.pow(16.0d, d-k) / (double)(8*k + j);
-         */
-        
-        return d16Sj - StrictMath.floor(d16Sj);
+           if(d>0)
+           {
+                for (int k = 0; k <= d; k++) {
+                   
+                    S1=S1+((modulo((d-k),(8*k+1)))/(8*k+1));
+                     S4=S4+((modulo((d-k),(8*k+4)))/(8*k+4));
+                      S5=S5+((modulo((d-k),(8*k+5)))/(8*k+5));
+                       S6=S6+((modulo((d-k),(8*k+6)))/(8*k+6));
+                }
+                
+               
+           S1=S1-Math.round(S1);
+           S4=S4-Math.round(S4);
+           S5=S5-Math.round(S5);
+           S6=S6-Math.round(S6);
+            
+            }
+
+           pi=4*S1-2*S4-S5-S6;
+           
+           
+           String pijegyek = new String();
+           while(pi>0)
+           {
+               //System.out.println("Pi jegyek: "+pi);
+               pijegyek=pijegyek+betuzes(pi);
+               //System.out.println("Pi jegyek: "+pi);
+               pi=Hexalas(pi);
+               //System.out.println(pi);
+               
+           }
+           
+               System.out.println(pijegyek);
+           
+            
+
     }
-    /**
-     * Bináris hatványozás mod k, a 16^n mod k kiszámítása.
-     *
+    
+}
