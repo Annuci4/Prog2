@@ -10,8 +10,11 @@ string convertWord(string word);
 string word = " ";
 string again = "n";
 //Array declaration
-string alphabet= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-string leet[52]={"4","B","(","D","3","F","9","H","I","J","K","L","M","N","0","P","Q","R","5","7","U","V","W","X","Y","2","4","b","(","d","3","f","9","h","i","j","k","l","m","n","0","p","q","r","5","7","u","v","w","x","y","2"};
+string alphabet= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+string leet[62]={"4","8","(","D","3","F","9","H","I","J","K",
+"1","M","N","0","P","9","R","5","7","U","V","W","X","Y","2",
+"4","b","(","d","3","f","9","h","i","j","k","l","m","n","0",
+"p","q","r","5","7","u","v","w","x","y","2","O","I","Z","E","h","S","b","T","X","g"};
 int main()
 {
 
@@ -52,7 +55,7 @@ string convertWord(string word)
 {
       for(size_t i = 0; i < word.size(); i++)
 {
-   for(int j = 0; j < 52; j++)
+   for(int j = 0; j < 62; j++)
    {
       if(word[i] == alphabet[j])
          word.replace(i, leet[j].size(), leet[j]);
