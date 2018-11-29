@@ -88,6 +88,8 @@ public class PiBBPBench678 {
         double d16S4t = 0.0d;
         double d16S5t = 0.0d;
         double d16S6t = 0.0d;
+        double d16S7t = 0.0d;
+        double d16S8t = 0.0d;
         
         int jegy = 0;
         
@@ -122,6 +124,7 @@ public class PiBBPBench678 {
             d16S4t = d16Sj(d, 4);
             d16S5t = d16Sj(d, 5);
             d16S6t = d16Sj(d, 6);
+            d16S7t = d16Sj(d, 7);
             
             d16Pi = 4.0d*d16S1t - 2.0d*d16S4t - d16S5t - d16S6t;
             
@@ -143,6 +146,7 @@ public class PiBBPBench678 {
             d16S4t = d16Sj(d, 4);
             d16S5t = d16Sj(d, 5);
             d16S6t = d16Sj(d, 6);
+            d16S8t = d16Sj(d, 8);
             
             d16Pi = 4.0d*d16S1t - 2.0d*d16S4t - d16S5t - d16S6t;
             
