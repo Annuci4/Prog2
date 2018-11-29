@@ -83,6 +83,8 @@ main ()
   double d16S4t = 0.0;
   double d16S5t = 0.0;
   double d16S6t = 0.0;
+	double d16S7 = 0.0;
+	double d16S8 = 0.0;
 
   int jegy;
   int d;
@@ -115,6 +117,7 @@ main ()
       d16S4t = d16Sj (d, 4);
       d16S5t = d16Sj (d, 5);
       d16S6t = d16Sj (d, 6);
+      d16S7t = d16Sj (d, 7) ;
 
       d16Pi = 4.0 * d16S1t - 2.0 * d16S4t - d16S5t - d16S6t;
 
@@ -132,6 +135,7 @@ for (d = 100000000; d < 100000001; ++d)
       d16S4t = d16Sj (d, 4);
       d16S5t = d16Sj (d, 5);
       d16S6t = d16Sj (d, 6);
+      d16S8t = d16Sj (d, 8) ;
 
       d16Pi = 4.0 * d16S1t - 2.0 * d16S4t - d16S5t - d16S6t;
 
