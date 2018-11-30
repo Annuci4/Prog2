@@ -1,34 +1,30 @@
-// ez a T az LSP-ben
-class Madar {
+#include <iostream>
+
+using namespace std;
+
+class Kacsa {
 public:
-     virtual void repul() {};
+	virtual void repul(){
+		cout<<"Repulok"<<endl;
+	};
 };
 
-// ez a két osztály alkotja a "P programot" az LPS-ben
 class Program {
 public:
-     void fgv ( Madar &madar ) {
-          madar.repul();
-     }
+	void fgv (Kacsa &kacsa){
+		kacsa.repul();
+	}
 };
 
-// itt jönnek az LSP-s S osztályok
-class Sas : public Madar
+class JatekKacsa : public Kacsa
 {};
 
-class Pingvin : public Madar // ezt úgy is lehet/kell olvasni, hogy a pingvin tud repülni
-{};
-
-int main ( int argc, char **argv )
+int main (int argc, char **argv)
 {
-     Program program;
-     Madar madar;
-     program.fgv ( madar );
+	Program program;
+	Kacsa kacsa;
+	program.fgv (kacsa);
 
-     Sas sas;
-     program.fgv ( sas );
-
-     Pingvin pingvin;
-     program.fgv ( pingvin ); // sérül az LSP, mert a P::fgv röptetné a Pingvint, ami ugye lehetetlen.
-
+	JatekKacsa jatek_kacsa;
+	program.fgv (jatek_kacsa);
 }
